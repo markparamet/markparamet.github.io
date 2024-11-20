@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pharmacy Website</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <header>
+    <div class="header-container" style="text-align: center; display: flex; align-items: center;">
+      <img src="https://imgur.com/HngO4EP.jpg" alt="Image from Imgur" class="logo" style="margin-right: 20px;">
+      <h1 style="margin: 0;"></h1>
+
+      <nav>
+        <ul>
+          <li><a href="https://codepen.io/Paramet-Bubchaiya/full/eYqQVMe" target="_blank" class="no-underline">สินค้า</a></li>
+          <li><a  href="https://codepen.io/Paramet-Bubchaiya/full/jOgJrmV" target="_blank" class="no-underline">การบริการ</a></li>
+          <li><a href="https://codepen.io/Paramet-Bubchaiya/full/BaXGYvK" target="_blank" class="no-underline">บทความเพื่อสุขภาพ</a></li>
+          <li><a href="https://codepen.io/Paramet-Bubchaiya/full/KKObLJg" target="_blank" class="no-underline">ติดต่อเรา</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <style>
+    .grid-container {
+      display: flex;
+      overflow: hidden;
+      width: 150%;
+      position: relative;
+    }
+
+    .column {
+      min-width: 33.33%;
+      box-sizing: border-box;
+      padding: 20px;
+      transition: transform 1s ease;
+    }
+
+    .slider-wrapper {
+      display: flex;
+      width: 600%;
+    }
+
+    .column img {
+      width: 100%;
+      height: auto;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    .dot-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .dot {
+      height: 15px;
+      width: 15px;
+      margin: 0 5px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    .active {
+      background-color: #717171;
+    }
+
+    .logo {
+      max-width: 150px;
+      height: auto;
+    }
+  </style>
+
+  <header style="text-align: center; padding: 20px;">
+    <h1>สินค้ามากมายในการบริหาร</h1>
+    <p>ยา อาหารเสริม อุปกรณ์การแพท ผลิตภัณฑ์ดูแลสุขภาพและความงาม ผลิตภัณฑ์สำหรับเด็ก</p>
+  </header>
+
+  <div class="grid-container" id="carousel">
+    <div class="slider-wrapper">
+      <div class="column">
+        <img src="https://via.placeholder.com/400x250" alt="Adventure Mini">
+        <h2>Adventure Mini</h2>
+        <p>Unleashing adventure with elegance, the Koran Journey blends immersive experiences with cultural exploration, delivering a thrilling trip that's both enriching and exciting.</p>
+        <p class="price">From $14,000</p>
+        <button>Configure</button>
+      </div>
+      <div class="column">
+        <img src="https://via.placeholder.com/400x250" alt="Koran X">
+        <h2>Koran X</h2>
+        <p>A thrilling journey in every detail, our tours capture the essence of adventure. Designed for those who seek excitement and discovery.</p>
+        <p class="price">From $19,000</p>
+        <button>Configure</button>
+      </div>
+      <div class="column">
+        <img src="https://via.placeholder.com/400x250" alt="Koran GT">
+        <h2>Koran GT</h2>
+        <p>Designed for the adventure enthusiast, our tours offer unforgettable experiences in breathtaking locations. Tailored for exploration, they promise an exhilarating journey.</p>
+        <p class="price">From $1,500</p>
+        <button>Configure</button>
+      </div>
+      <div class="column">
+        <img src="https://via.placeholder.com/400x250" alt="Explorer X">
+        <h2>Explorer X</h2>
+        <p>For those who love pushing the limits, Explorer X offers a dynamic and exhilarating adventure with all the luxury you deserve.</p>
+        <p class="price">From $22,000</p>
+        <button>Configure</button>
+      </div>
+      <div class="column">
+        <img src="https://via.placeholder.com/400x250" alt="Adventure Pro">
+        <h2>Adventure Pro</h2>
+        <p>Take on the most challenging terrains with Adventure Pro, your perfect companion for a high-octane exploration journey.</p>
+        <p class="price">From $18,500</p>
+        <button>Configure</button>
+      </div>
+      <div class="column">
+        <img src="https://via.placeholder.com/400x250" alt="Koran Ultra">
+        <h2>Koran Ultra</h2>
+        <p>The ultimate luxurious adventure experience, designed for those who want to explore the world in the most thrilling way possible.</p>
+        <p class="price">From $25,000</p>
+        <button>Configure</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="dot-container">
+    <span class="dot" onclick="currentSlide(0)"></span>
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+    <span class="dot" onclick="currentSlide(3)"></span>
+    <span class="dot" onclick="currentSlide(4)"></span>
+    <span class="dot" onclick="currentSlide(5)"></span>
+  </div>
+  <footer style="text-align: center; padding: 20px;">
+    <p>&copy; ตลาดเหนือฟาร์ม่า</p>
+  </footer>
+  <script>
+    let currentIndex = 0;
+    const columns = document.querySelectorAll('.column');
+    const totalColumns = columns.length;
+    const carousel = document.querySelector('.slider-wrapper');
+    const displayCount = 3;
+    const dots = document.querySelectorAll('.dot');
+    let isDragging = false;
+    let startPosition = 0;
+    let currentTranslate = 0;
+    let prevTranslate = 0;
+
+    function updateDots() {
+      dots.forEach((dot, index) => {
+        dot.classList.remove('active');
+        if (index === currentIndex) {
+          dot.classList.add('active');
+        }
+      });
+    }
+
+    function autoSlide() {
+      currentIndex++;
+      if (currentIndex + displayCount > totalColumns) {
+        currentIndex = 0;
+      }
+      carousel.style.transition = 'transform 1s ease-out';
+      carousel.style.transform = `translateX(-${(100 / displayCount) * currentIndex}%)`;
+      updateDots();
+    }
+
+    function currentSlide(index) {
+      currentIndex = index;
+      carousel.style.transition = 'transform 1s ease-out';
+      carousel.style.transform = `translateX(-${(100 / displayCount) * currentIndex}%)`;
+      updateDots();
+    }
+    carousel.addEventListener('mousedown', dragStart);
+    carousel.addEventListener('mouseup', dragEnd);
+    carousel.addEventListener('mouseleave', dragEnd);
+    carousel.addEventListener('mousemove', dragMove);
+
+    function dragStart(event) {
+      isDragging = true;
+      startPosition = event.pageX;
+      carousel.style.transition = 'none';
+      prevTranslate = currentTranslate;
+    }
+
+    function dragEnd() {
+      isDragging = false;
+      const movedBy = currentTranslate - prevTranslate;
+      if (movedBy < -100 && currentIndex + displayCount < totalColumns) {
+        currentIndex++;
+      } else if (movedBy > 100 && currentIndex > 0) {
+        currentIndex--;
+      }
+      carousel.style.transition = 'transform 1s ease-out';
+      carousel.style.transform = `translateX(-${(100 / displayCount) * currentIndex}%)`;
+      updateDots();
+    }
+
+    function dragMove(event) {
+      if (isDragging) {
+        const currentPosition = event.pageX;
+        currentTranslate = prevTranslate + currentPosition - startPosition;
+        carousel.style.transform = `translateX(${currentTranslate}px)`;
+      }
+    }
+    setInterval(() => {
+      autoSlide();
+    }, 5000);
+    updateDots();
+  </script>
+
+  <div class="service-container">
+    <div class="service">
+      <h3>ที่ตลาดเหนือฟาร์ม่า</h3>
+      <p>เราไม่เพียงแค่ขายยา แต่เราพร้อมเป็นส่วนหนึ่งในการดูแลสุขภาพของคุณและครอบครัวอย่างแท้จริง ร้านของเรายึดมั่นในหลักการของเภสัชกรรมชุมชน เราเชื่อว่า การดูแลสุขภาพต้องไปไกลกว่าการให้ยารักษา แต่เป็นการให้คำแนะนำเชิงสุขภาพที่ถูกต้อง เหมาะสม และตอบโจทย์ตามความต้องการของลูกค้าแต่ละคน</p>
+    </div>
+  </div>
+
+  <div class="service-container">
+    <div class="service">
+
+      <h2>การบริการของเรา</h2>
+      <div class="service-grid">
+        <div class="service">
+          <h3>Consultation</h3>
+          <p>Speak with our expert pharmacists for advice and guidance on medication.</p>
+        </div>
+        <div class="service">
+          <h3>Delivery</h3>
+          <p>Get your orders delivered to your doorstep safely and on time.</p>
+        </div>
+      </div>
+      </section>
+
+      <!-- Modal for Product Details -->
+      <div id="product-details-modal" class="modal">
+        <div class="modal-content">
+          <span class="close" onclick="closeModal()">&times;</span>
+          <h2 id="product-title"></h2>
+          <p id="product-description">Detailed information about the product.</p>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer>
+        <p>&copy; 2024 Pharmacy | Innovating Health for You</p>
+      </footer>
+
+      <script src="script.js"></script>
+</body>
+
+</html>
